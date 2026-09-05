@@ -64,6 +64,12 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        wordmark: [
+          'var(--font-wordmark)',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         lg: '12px',

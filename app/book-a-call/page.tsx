@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { CheckMark, Icon } from '@/components/ui/icons'
 import { Reveal } from '@/components/ui/reveal'
 import { LeadForm } from '@/components/LeadForm'
+import { GhlCalendar } from '@/components/GhlCalendar'
 import { bookACall, faqs, seo, site } from '@/content/site'
 
 export const metadata: Metadata = {
@@ -140,34 +141,10 @@ export default function BookACallPage({
               </h2>
             </div>
 
-            {/* ------------------------------------------------------------ *
-             * CALENDAR EMBED PLACEHOLDER
-             * ------------------------------------------------------------
-             * Drop the scheduling embed in place of this block. For Cal.com or
-             * Calendly, prefer their inline embed over an <iframe> so the widget
-             * sizes itself and stays keyboard accessible, e.g.:
-             *
-             *   <Cal calLink="socioglobal/revenue-call" />
-             *
-             * If you use a raw iframe instead, give it a title attribute
-             * ("Book a revenue call") so screen readers announce it, and set an
-             * explicit height to avoid layout shift hurting Lighthouse.
-             *
-             * Whichever tool you pick, mirror the submission into /api/lead so
-             * booked calls and form enquiries land in the CRM the same way.
-             * ------------------------------------------------------------ */}
-            <div className="card mt-10 flex min-h-[420px] flex-col items-center justify-center border-dashed p-10 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-tint-blue text-primary">
-                <Icon name="calendar" className="h-7 w-7" />
-              </span>
-              <p className="mt-5 text-[1.0625rem] font-semibold text-ink">
-                Scheduling embed goes here
-              </p>
-              <p className="mt-2 max-w-md text-[0.9375rem] text-body">
-                Until the calendar is connected, the form above reaches the same inbox
-                and gets the same one-business-day reply.
-              </p>
-            </div>
+            {/* The live GoHighLevel calendar, or a placeholder when the id is
+                not configured. Bookings made here land in GHL directly. */}
+            <GhlCalendar calendarId={process.env.NEXT_PUBLIC_GHL_CALENDAR_ID} />
+
           </Reveal>
         </div>
       </section>

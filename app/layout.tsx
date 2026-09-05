@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Oswald } from 'next/font/google'
 
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -13,6 +13,17 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-inter',
+})
+
+/**
+ * Used only by the wordmark. Inter has no condensed width, and the logotype is
+ * a narrow industrial grotesque, so one extra subsetted face carries it.
+ */
+const oswald = Oswald({
+  subsets: ['latin'],
+  weight: ['500'],
+  display: 'swap',
+  variable: '--font-wordmark',
 })
 
 export const metadata: Metadata = {
@@ -143,7 +154,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
       <body className="font-sans antialiased">
         <a
           href="#main"
