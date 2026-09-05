@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Canvas */
+    --white: #ffffff;
+    --canvas: #f7f9fc;
+    --surface: #ffffff;
+
+    /* Ink */
+    --ink: #0a0e1a;
+    --body: #4a5568;
+    --muted: #8a94a6;
+
+    /* Accents */
+    --primary: #3b5bff;
+    --primary-dark: #2440d9;
+    --emerald: #00c48c;
+    --coral: #ff7a45;
+    --violet: #7c5cff;
+    --amber: #ffb020;
+
+    /* Section tints */
+    --tint-blue: #eef3ff;
+    --tint-mint: #e8fbf4;
+    --tint-peach: #fff3ed;
+    --tint-violet: #f3efff;
+
+    /* Lines */
+    --border: #e4e9f2;
+    --border-soft: #f0f3f8;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  /* Visible focus states on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--tint-blue);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+
+  .lede {
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    color: var(--body);
+  }
+
+  .card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow:
+      0 1px 3px rgba(10, 14, 26, 0.04),
+      0 8px 24px rgba(10, 14, 26, 0.04);
+    transition:
+      transform 200ms ease-out,
+      border-color 200ms ease-out,
+      box-shadow 200ms ease-out;
+  }
+
+  /* Cards lift 2px on hover; the border shifts toward the card's own accent,
+     set per-card through the --card-accent custom property. */
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    border-color: var(--card-accent, var(--primary));
+    box-shadow:
+      0 1px 3px rgba(10, 14, 26, 0.05),
+      0 12px 32px rgba(10, 14, 26, 0.07);
+  }
+
+  /* Subtle dot-grid, used behind one or two sections. */
+  .dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .section {
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  /* Numbers rendered with tabular figures so counting animations don't jitter. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
