@@ -12,7 +12,9 @@
     /* Ink */
     --ink: #0a0e1a;
     --body: #4a5568;
-    --muted: #8a94a6;
+    /* Darkened from the original #8A94A6, which measured 3.06:1 on white and
+       failed WCAG AA for the caption and label text it is used on. */
+    --muted: #646e7d;
 
     /* Accents */
     --primary: #3b5bff;
@@ -21,6 +23,15 @@
     --coral: #ff7a45;
     --violet: #7c5cff;
     --amber: #ffb020;
+
+    /* Text-safe accent shades. The vivid accents above stay in use for fills,
+       icons and borders; these darker pairs are for anything set as type,
+       because every vivid accent fails WCAG AA contrast as text. */
+    --primary-ink: #3b5bff;
+    --emerald-ink: #00795c;
+    --coral-ink: #be3a0b;
+    --violet-ink: #6a47f5;
+    --amber-ink: #8a6100;
 
     /* Section tints */
     --tint-blue: #eef3ff;
@@ -31,6 +42,43 @@
     /* Lines */
     --border: #e4e9f2;
     --border-soft: #f0f3f8;
+
+    /* ------------------------------------------------------------------
+       Channel copies of the colours above.
+
+       Tailwind can only apply an opacity modifier (bg-white/90) when the
+       colour is expressed as channels it can inject alpha into. A plain hex
+       held in a custom property silently produces no utility at all, so
+       every one of these has an "-rgb" twin and the Tailwind theme is built
+       on those. The hex values above stay authoritative and remain usable
+       directly in CSS.
+       ------------------------------------------------------------------ */
+    --white-rgb: 255 255 255;
+    --canvas-rgb: 247 249 252;
+    --surface-rgb: 255 255 255;
+    --ink-rgb: 10 14 26;
+    --body-rgb: 74 85 104;
+    --muted-rgb: 100 110 125;
+
+    --primary-rgb: 59 91 255;
+    --primary-dark-rgb: 36 64 217;
+    --primary-ink-rgb: 59 91 255;
+    --emerald-rgb: 0 196 140;
+    --emerald-ink-rgb: 0 121 92;
+    --coral-rgb: 255 122 69;
+    --coral-ink-rgb: 190 58 11;
+    --violet-rgb: 124 92 255;
+    --violet-ink-rgb: 106 71 245;
+    --amber-rgb: 255 176 32;
+    --amber-ink-rgb: 138 97 0;
+
+    --tint-blue-rgb: 238 243 255;
+    --tint-mint-rgb: 232 251 244;
+    --tint-peach-rgb: 255 243 237;
+    --tint-violet-rgb: 243 239 255;
+
+    --border-rgb: 228 233 242;
+    --border-soft-rgb: 240 243 248;
   }
 
   * {
@@ -141,6 +189,43 @@
   .section {
     padding-top: clamp(4rem, 8vw, 7rem);
     padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  /* Range input, styled for both engines. Kept in CSS because the thumb
+     pseudo-elements cannot be expressed as utility classes. */
+  .calc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--border);
+    outline-offset: 4px;
+    cursor: pointer;
+  }
+
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 22px;
+    width: 22px;
+    border-radius: 999px;
+    background: var(--primary);
+    border: 3px solid var(--white);
+    box-shadow: 0 1px 6px rgba(10, 14, 26, 0.22);
+    transition: transform 150ms ease-out;
+  }
+
+  .calc-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .calc-slider::-moz-range-thumb {
+    height: 22px;
+    width: 22px;
+    border-radius: 999px;
+    background: var(--primary);
+    border: 3px solid var(--white);
+    box-shadow: 0 1px 6px rgba(10, 14, 26, 0.22);
   }
 
   /* Numbers rendered with tabular figures so counting animations don't jitter. */

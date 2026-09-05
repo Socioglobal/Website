@@ -43,7 +43,7 @@ export function TrackRecord() {
           {trackRecord.points.map((point) => (
             <RevealItem as="li" key={point}>
               <div className="card flex items-start gap-4 p-5 sm:p-6">
-                <CheckMark className="mt-0.5 shrink-0 text-emerald" />
+                <CheckMark className="mt-0.5 shrink-0 text-emerald-ink" />
                 <p className="text-ink">{point}</p>
               </div>
             </RevealItem>

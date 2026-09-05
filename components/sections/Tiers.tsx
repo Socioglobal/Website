@@ -19,7 +19,7 @@ export function Tiers() {
         sub={tiers.sub}
       />
 
-      {/* Callout strip — the entry point above the three engagements. */}
+      {/* Callout strip — the low-commitment entry point above the engagements. */}
       <Reveal className="mt-12">
         <div className="card flex flex-col gap-6 border-primary/30 bg-tint-blue p-7 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
@@ -46,7 +46,7 @@ export function Tiers() {
               className={cn(
                 'card card-interactive flex h-full flex-col p-7',
                 // The middle engagement carries a primary border.
-                tier.emphasised && 'border-primary shadow-card-hover lg:-mt-3 lg:pb-9 lg:pt-9'
+                tier.emphasised && 'border-primary shadow-card-hover lg:-mt-3 lg:py-9'
               )}
               style={{ ['--card-accent' as string]: accent.cssVar }}
             >
@@ -57,37 +57,60 @@ export function Tiers() {
               ) : null}
 
               <h3 className="text-[1.375rem]">{tier.name}</h3>
+              <p className="mt-2.5 text-[0.9375rem] text-body">{tier.premise}</p>
 
-              <dl className="mt-5 space-y-3 border-y border-border-soft py-5">
+              <dl className="mt-5 grid grid-cols-2 gap-4 border-y border-border-soft py-5">
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
                     For
                   </dt>
-                  <dd className="mt-1 text-[0.9375rem] text-ink">{tier.forWho}</dd>
+                  <dd className="mt-1 text-sm text-ink">{tier.forWho}</dd>
                 </div>
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
                     Replaces
                   </dt>
-                  <dd className={cn('mt-1 text-[0.9375rem] font-semibold', accent.text)}>
+                  <dd className={cn('mt-1 text-sm font-semibold', accent.text)}>
                     {tier.replaces}
                   </dd>
                 </div>
               </dl>
 
-              <ul className="mt-6 flex-1 space-y-3">
+              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+                {tier.buildLabel}
+              </p>
+              <ul className="mt-3.5 flex-1 space-y-3">
                 {tier.includes.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckMark className={cn('mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0', accent.text)} />
-                    <span className="text-[0.9375rem] text-body">{item}</span>
+                    <CheckMark
+                      className={cn('mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0', accent.text)}
+                    />
+                    <span className="text-[0.9375rem] leading-snug text-body">{item}</span>
                   </li>
                 ))}
               </ul>
 
+              <div className="mt-6 space-y-3 border-t border-border-soft pt-5">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+                    {tier.rhythmLabel}
+                  </p>
+                  <p className="mt-1 text-[0.9375rem] text-body">{tier.rhythm}</p>
+                </div>
+                <div className={cn('rounded-lg p-4', accent.tintBg)}>
+                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+                    {tier.outcomeLabel}
+                  </p>
+                  <p className="mt-1 text-[0.9375rem] font-medium text-ink">
+                    {tier.outcome}
+                  </p>
+                </div>
+              </div>
+
               <Button
                 asChild
                 variant={tier.emphasised ? 'primary' : 'outline'}
-                className="mt-8 w-full"
+                className="mt-6 w-full"
               >
                 <Link href={`/book-a-call?tier=${encodeURIComponent(tier.name)}`}>
                   {tiers.cta}
@@ -97,6 +120,10 @@ export function Tiers() {
           )
         })}
       </RevealGroup>
+
+      <Reveal className="mx-auto mt-8 max-w-3xl">
+        <p className="text-center text-sm text-muted">{tiers.footnote}</p>
+      </Reveal>
     </Section>
   )
 }

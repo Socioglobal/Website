@@ -16,14 +16,19 @@ export interface LeadPayload {
   companySize?: string
   outboundApproach?: string
   message?: string
+  /** Set when the enquiry came from a tier or segment CTA. */
+  tier?: string
+  segment?: string
   source: LeadSource
   /** Populated by the calculator form so the emailed breakdown matches the screen. */
   calculator?: {
     avgDealValue: number
     dealsPerMonth: number
     targetDealsPerMonth: number
+    closeRatePercent: number
     monthlyGap: number
     annualGap: number
+    meetingsNeeded: number
   }
 }
 
@@ -73,6 +78,8 @@ export async function POST(request: Request) {
     companySize: asString(input.companySize, 80) || undefined,
     outboundApproach: asString(input.outboundApproach, 160) || undefined,
     message: asString(input.message, 4000) || undefined,
+    tier: asString(input.tier, 80) || undefined,
+    segment: asString(input.segment, 80) || undefined,
     source: (asString(input.source, 40) || 'book-a-call') as LeadSource,
     calculator:
       input.calculator && typeof input.calculator === 'object'

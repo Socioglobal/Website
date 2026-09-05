@@ -12,7 +12,7 @@ export function ChecklistBand() {
         <Reveal>
           <div className="card mx-auto max-w-4xl border-amber/30 p-7 sm:p-9">
             <div className="flex items-start gap-4">
-              <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-tint-peach text-amber sm:inline-flex">
+              <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-tint-peach text-amber-ink sm:inline-flex">
                 <Icon name="mail" />
               </span>
               <div>

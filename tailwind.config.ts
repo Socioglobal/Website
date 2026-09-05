@@ -16,30 +16,47 @@ const config: Config = {
       screens: { '2xl': '1200px' },
     },
     extend: {
+      // Built on the "-rgb" channel variables (see globals.css) so that
+      // opacity modifiers such as bg-white/90 actually compile.
       colors: {
-        white: 'var(--white)',
-        canvas: 'var(--canvas)',
-        surface: 'var(--surface)',
-        ink: 'var(--ink)',
-        body: 'var(--body)',
-        muted: 'var(--muted)',
+        white: 'rgb(var(--white-rgb) / <alpha-value>)',
+        canvas: 'rgb(var(--canvas-rgb) / <alpha-value>)',
+        surface: 'rgb(var(--surface-rgb) / <alpha-value>)',
+        ink: 'rgb(var(--ink-rgb) / <alpha-value>)',
+        body: 'rgb(var(--body-rgb) / <alpha-value>)',
+        muted: 'rgb(var(--muted-rgb) / <alpha-value>)',
         primary: {
-          DEFAULT: 'var(--primary)',
-          dark: 'var(--primary-dark)',
+          DEFAULT: 'rgb(var(--primary-rgb) / <alpha-value>)',
+          dark: 'rgb(var(--primary-dark-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--primary-ink-rgb) / <alpha-value>)',
         },
-        emerald: 'var(--emerald)',
-        coral: 'var(--coral)',
-        violet: 'var(--violet)',
-        amber: 'var(--amber)',
+        // Vivid accents for fills, icons and borders; the "ink" pairs are the
+        // contrast-safe shades used for anything set as type.
+        emerald: {
+          DEFAULT: 'rgb(var(--emerald-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--emerald-ink-rgb) / <alpha-value>)',
+        },
+        coral: {
+          DEFAULT: 'rgb(var(--coral-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--coral-ink-rgb) / <alpha-value>)',
+        },
+        violet: {
+          DEFAULT: 'rgb(var(--violet-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--violet-ink-rgb) / <alpha-value>)',
+        },
+        amber: {
+          DEFAULT: 'rgb(var(--amber-rgb) / <alpha-value>)',
+          ink: 'rgb(var(--amber-ink-rgb) / <alpha-value>)',
+        },
         tint: {
-          blue: 'var(--tint-blue)',
-          mint: 'var(--tint-mint)',
-          peach: 'var(--tint-peach)',
-          violet: 'var(--tint-violet)',
+          blue: 'rgb(var(--tint-blue-rgb) / <alpha-value>)',
+          mint: 'rgb(var(--tint-mint-rgb) / <alpha-value>)',
+          peach: 'rgb(var(--tint-peach-rgb) / <alpha-value>)',
+          violet: 'rgb(var(--tint-violet-rgb) / <alpha-value>)',
         },
         border: {
-          DEFAULT: 'var(--border)',
-          soft: 'var(--border-soft)',
+          DEFAULT: 'rgb(var(--border-rgb) / <alpha-value>)',
+          soft: 'rgb(var(--border-soft-rgb) / <alpha-value>)',
         },
       },
       borderColor: {

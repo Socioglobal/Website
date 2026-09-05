@@ -73,7 +73,7 @@ export const credibility = [
   { value: '$10M+', label: 'Enterprise B2B revenue generated' },
   { value: '300+', label: 'B2B clients served' },
   { value: 'Oracle', label: 'Partner ecosystem experience' },
-  { value: '25+', label: 'Sales and delivery people hired and mentored' },
+  { value: '10+ yrs', label: 'Building and mentoring B2B sales teams' },
 ] as const
 
 /* ------------------------------------------------------------------ */
@@ -119,46 +119,77 @@ export const problem = {
 export const calculator = {
   eyebrow: 'Pipeline Cost Calculator',
   h2: 'What is the gap between your pipeline and your target costing you?',
-  sub: 'Three questions. The figures update as you type.',
+  sub: 'Four questions. Drag the sliders and the figures move with you — nothing is hidden behind a form.',
+  presets: [
+    { label: 'Web agency', avgDealValue: 35_000, dealsPerMonth: 2, targetDealsPerMonth: 4, closeRatePercent: 25 },
+    { label: 'Software firm', avgDealValue: 120_000, dealsPerMonth: 1, targetDealsPerMonth: 3, closeRatePercent: 18 },
+    { label: 'ERP partner', avgDealValue: 250_000, dealsPerMonth: 1, targetDealsPerMonth: 2, closeRatePercent: 15 },
+    { label: 'MSP', avgDealValue: 45_000, dealsPerMonth: 2, targetDealsPerMonth: 6, closeRatePercent: 22 },
+  ],
   steps: [
     {
       key: 'avgDealValue' as const,
+      short: 'Deal value',
       question: 'What is your average deal value?',
-      help: 'Total contract value of a typical closed deal, in dollars.',
+      help: 'Total contract value of a typical closed deal. For recurring contracts, use the first-year value.',
       prefix: '$',
+      suffix: '',
       step: 1000,
-      min: 0,
-      max: 10_000_000,
+      min: 1000,
+      max: 500_000,
     },
     {
       key: 'dealsPerMonth' as const,
+      short: 'Closing now',
       question: 'How many deals do you close in a typical month?',
-      help: 'Your honest current run rate, not your best month.',
+      help: 'Your honest current run rate, not your best month. Decimals are fine — enter 0 if it is lumpy.',
       prefix: '',
+      suffix: ' / mo',
       step: 1,
       min: 0,
-      max: 1000,
+      max: 40,
     },
     {
       key: 'targetDealsPerMonth' as const,
-      question: 'How many deals per month do you want to be closing?',
-      help: 'The run rate the business is actually built for.',
+      short: 'Target',
+      question: 'How many deals a month do you want to be closing?',
+      help: 'The run rate the business is actually built to deliver.',
       prefix: '',
+      suffix: ' / mo',
       step: 1,
       min: 0,
-      max: 1000,
+      max: 40,
+    },
+    {
+      key: 'closeRatePercent' as const,
+      short: 'Close rate',
+      question: 'What share of qualified meetings turn into deals?',
+      help: 'Most B2B technology firms sit between 15% and 30%. This is what turns a revenue gap into a meeting target.',
+      prefix: '',
+      suffix: '%',
+      step: 1,
+      min: 1,
+      max: 100,
     },
   ],
   results: {
     monthly: 'Revenue gap per month',
     annual: 'Annual revenue gap',
+    meetings: 'Qualified meetings a month to close it',
     sdr: 'Cost to close it with an in-house SDR',
     closingLine:
       'An outbound system reaches full output in 30–60 days, not 5 months.',
+    assumptions:
+      'Assumes a fully loaded SDR cost of $75,000 a year, around 12 qualified meetings a month at full output, and a five-month ramp during which output climbs steadily rather than arriving all at once. Change any input above to test your own numbers.',
+  },
+  cta: {
+    heading: 'Want the version with your name on it?',
+    sub: 'Book a 30-minute call and we will walk through these numbers against your actual pipeline, then tell you what we would build first.',
+    button: 'Book a Revenue Call',
   },
   form: {
-    heading: 'Send me the full breakdown',
-    sub: 'We will email the numbers above with a short read on where the gap is most likely coming from.',
+    heading: 'Or have the breakdown emailed to you',
+    sub: 'We will send these figures with a short read on where the gap is most likely coming from.',
     button: 'Send Me the Full Breakdown',
   },
 } as const
@@ -228,55 +259,81 @@ export const audit = {
 export const tiers = {
   eyebrow: 'Engagements',
   h2: 'Three ways to work with us.',
-  sub: 'Each engagement replaces a hire you would otherwise be making, onboarding and managing.',
+  sub: 'Each one replaces a hire you would otherwise be sourcing, onboarding and managing. Start anywhere; most firms move up a tier once the one below is running.',
   items: [
     {
       name: 'Pipeline Engine',
-      forWho: 'You have no consistent pipeline',
+      forWho: 'Nothing consistent is coming in',
       replaces: 'An SDR hire',
+      /** One line on the constraint this tier removes. */
+      premise:
+        'You have a proven offer and no reliable way to start conversations about it.',
       accent: 'primary' as AccentName,
       emphasised: false,
+      buildLabel: 'What we build and run',
       includes: [
-        'ICP definition and verified target lists',
-        'Cold email infrastructure, domains and warm-up',
-        'Sequence copywriting and ongoing testing',
-        'LinkedIn outreach playbooks',
-        'Reply handling and meeting booking',
-        'Weekly reporting on sends, replies and meetings',
+        'An ICP drawn from your last twenty closed deals, not from a persona workshop',
+        'Sending domains, authentication and warm-up done properly, so mail reaches the inbox',
+        'Verified contact lists, re-checked before every send so bounces stay low',
+        'Three message angles running side by side, so you learn which one earns replies',
+        'A LinkedIn outreach playbook your team can run in parallel',
+        'Replies read and qualified daily; the real ones land in your calendar',
       ],
+      rhythmLabel: 'Your week',
+      rhythm: 'A Monday number: sends, replies, meetings booked, and what changed.',
+      outcomeLabel: 'What changes',
+      outcome:
+        'Meetings arrive whether or not you had time to sell that week.',
     },
     {
       name: 'Pipeline + Conversion',
-      forWho: 'Leads go cold after the first reply',
+      forWho: 'Interest arrives, then quietly dies',
       replaces: 'SDR + RevOps hire',
+      premise:
+        'Getting the first reply is no longer the problem. Everything after it is.',
       accent: 'violet' as AccentName,
       emphasised: true,
+      buildLabel: 'Everything on the left, plus',
       includes: [
-        'Everything in Pipeline Engine',
-        'CRM build, pipeline stages and hygiene rules',
-        'Email and SMS nurture automation',
-        'Proposal and follow-up templates',
-        'Booking flows and handover to delivery',
-        'Conversion reporting by stage',
+        'A CRM built around the stages your deals actually move through',
+        'Every enquiry tracked from first reply to signed contract, with nothing living in an inbox',
+        'Automated follow-up for the majority who say “not right now” and mean “not yet”',
+        'Proposal and pricing templates that go out the same day the call ends',
+        'A booking flow that ends the scheduling back-and-forth',
+        'Stage-by-stage reporting that shows exactly where deals stall',
       ],
+      rhythmLabel: 'Your fortnight',
+      rhythm: 'A conversion review: what stalled, where, and the fix going in next.',
+      outcomeLabel: 'What changes',
+      outcome:
+        'Far fewer conversations are lost between the first reply and the contract.',
     },
     {
       name: 'Fractional Revenue Leadership',
-      forWho: 'You are the only one who can sell',
+      forWho: 'Selling still runs through you',
       replaces: 'A VP of Sales hire',
+      premise:
+        'The pipeline works. It just cannot scale past the hours you personally have.',
       accent: 'emerald' as AccentName,
       emphasised: false,
+      buildLabel: 'Everything to the left, plus',
       includes: [
-        'Everything in Pipeline + Conversion',
-        'Sales process design and documentation',
-        'Call coaching and deal strategy',
-        'Hiring support for your first sales hires',
-        'Weekly pipeline reviews and forecasting',
-        'Quarterly revenue planning with the leadership team',
+        'A written sales process specific enough that a new hire can follow it in week one',
+        'Recorded call reviews with named fixes, not general encouragement',
+        'Scorecards, interview questions and a 30-day onboarding plan for your first sales hires',
+        'A weekly pipeline review run with your leadership team, not sent as a report',
+        'A forecast you can plan hiring, cash and delivery capacity against',
+        'Quarterly revenue planning tied to what delivery can actually absorb',
       ],
+      rhythmLabel: 'Your quarter',
+      rhythm: 'A plan the leadership team has signed off, and a forecast that holds up.',
+      outcomeLabel: 'What changes',
+      outcome: 'Selling stops depending on you being in the room.',
     },
   ],
   cta: 'Discuss This Tier',
+  footnote:
+    'Every engagement is scoped per company after the audit, because a small studio selling short projects and a fifty-person partner selling enterprise implementations do not need the same machine. Everything we build is documented and yours to keep.',
 } as const
 
 /* ------------------------------------------------------------------ */
@@ -289,6 +346,7 @@ export const icps = [
     icon: 'code' as IconName,
     accent: 'primary' as AccentName,
     name: 'Web Development Agencies',
+    h2: 'Outbound lead generation for web development agencies',
     short: 'Referrals and repeat work carry the year, and the quiet months arrive without warning.',
     problem:
       'Most web development agencies grow on referrals and past clients. That works until a large project ends and there is nothing behind it. Outbound has usually been tried once, from a personal inbox, and abandoned when delivery got busy.',
@@ -303,6 +361,7 @@ export const icps = [
     icon: 'terminal' as IconName,
     accent: 'violet' as AccentName,
     name: 'Software Development Firms',
+    h2: 'Cold email and outbound for software development firms',
     short: 'Strong engineering, long sales cycles, and no repeatable way to start conversations.',
     problem:
       'Custom software and product engineering firms sell complex, high-value work into long buying cycles. Technical credibility is not the problem. Consistent, qualified conversations at the top of the pipeline are.',
@@ -317,6 +376,7 @@ export const icps = [
     icon: 'layers' as IconName,
     accent: 'emerald' as AccentName,
     name: 'Oracle & ERP Implementation Partners',
+    h2: 'Outbound for Oracle and ERP implementation partners',
     short: 'Enterprise deals, multiple stakeholders, and pipeline that depends on the partner channel.',
     problem:
       'ERP implementation partners sell into committees. Deals are large, cycles are long, and much of the pipeline arrives through the vendor channel. When the channel is quiet, there is often no independent source of opportunity.',
@@ -331,6 +391,7 @@ export const icps = [
     icon: 'server' as IconName,
     accent: 'amber' as AccentName,
     name: 'MSPs & IT Services',
+    h2: 'Outbound lead generation for MSPs and IT services firms',
     short: 'Recurring revenue is stable until churn arrives, and there is nothing queued to replace it.',
     problem:
       'Managed services businesses live on recurring contracts. That stability hides the risk: when a large account leaves, replacing it takes months of pipeline that was never being built. Most MSPs have no consistent source of new logos.',
@@ -590,4 +651,36 @@ export const footer = {
   ],
   disclaimer:
     'Results disclaimer: Socioglobal does not guarantee any specific revenue, pipeline or meeting outcome. Figures shown on this site describe past work and are not a projection of your results. Outcomes depend on your market, offer, pricing and sales execution.',
+} as const
+
+/* ------------------------------------------------------------------ */
+/* Per-page SEO                                                        */
+/* ------------------------------------------------------------------ */
+
+export const seo = {
+  home: {
+    title: 'B2B Outbound Agency & Revenue Systems for Tech Firms',
+    description:
+      'Socioglobal is a B2B outbound agency in Canada. We build and run cold email infrastructure, CRM and nurture, and fractional sales leadership for technology firms across North America.',
+  },
+  howItWorks: {
+    title: 'How It Works — 90 Days to a Running Outbound System',
+    description:
+      'Our 90-day B2B outbound process: ICP definition and cold email infrastructure in days 1–30, live campaigns and booked meetings in days 31–60, testing and documentation in days 61–90.',
+  },
+  whoItsFor: {
+    title: 'Who It’s For — Outbound for Agencies, MSPs and ERP Partners',
+    description:
+      'Outbound lead generation for MSPs, web development agencies, software development firms and Oracle ERP implementation partners. The pipeline problem each one faces, and what we build to fix it.',
+  },
+  about: {
+    title: 'About — B2B Revenue Agency in Canada',
+    description:
+      'Socioglobal is a B2B revenue agency headquartered in Canada, serving technology firms across North America. Systems over campaigns, embedded rather than arms-length.',
+  },
+  bookACall: {
+    title: 'Book a Revenue Call',
+    description:
+      'Book a 30-minute call with Socioglobal. We will look at your pipeline, tell you what we would build first, and give you an honest answer if we are not the right fit.',
+  },
 } as const

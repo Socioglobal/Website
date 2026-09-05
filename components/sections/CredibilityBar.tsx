@@ -13,7 +13,7 @@ export function CredibilityBar() {
         <RevealGroup as="ul" className="grid grid-cols-2 gap-x-8 gap-y-9 py-11 lg:grid-cols-4">
           {credibility.map((stat) => (
             <RevealItem as="li" key={stat.label}>
-              <p className="tnum text-[2rem] font-bold leading-none tracking-tight text-emerald">
+              <p className="tnum text-[2rem] font-bold leading-none tracking-tight text-emerald-ink">
                 {stat.value}
               </p>
               <p className="mt-2.5 text-[0.9375rem] leading-snug text-body">

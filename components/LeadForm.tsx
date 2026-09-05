@@ -117,7 +117,7 @@ export function LeadForm({
           className
         )}
       >
-        <CheckMark className="mt-0.5 shrink-0 text-emerald" />
+        <CheckMark className="mt-0.5 shrink-0 text-emerald-ink" />
         <p className="text-ink">{successMessage}</p>
       </div>
     )
@@ -143,7 +143,7 @@ export function LeadForm({
               <Label htmlFor={inputId}>
                 {FIELD_LABELS[field]}
                 {REQUIRED.includes(field) ? (
-                  <span aria-hidden="true" className="ml-0.5 text-coral">
+                  <span aria-hidden="true" className="ml-0.5 text-coral-ink">
                     *
                   </span>
                 ) : null}
@@ -207,7 +207,7 @@ export function LeadForm({
               )}
 
               {errors[field] ? (
-                <p id={`${inputId}-error`} className="mt-1.5 text-sm text-coral">
+                <p id={`${inputId}-error`} className="mt-1.5 text-sm text-coral-ink">
                   {errors[field]}
                 </p>
               ) : null}
@@ -238,7 +238,7 @@ export function LeadForm({
       </div>
 
       {formError ? (
-        <p role="alert" className="mt-3 text-sm text-coral">
+        <p role="alert" className="mt-3 text-sm text-coral-ink">
           {formError}
         </p>
       ) : null}
