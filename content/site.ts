@@ -293,7 +293,7 @@ export const tiers = {
         'Getting the first reply is no longer the problem. Everything after it is.',
       accent: 'violet' as AccentName,
       emphasised: true,
-      buildLabel: 'Everything on the left, plus',
+      buildLabel: 'Everything in Pipeline Engine, plus',
       includes: [
         'A CRM built around the stages your deals actually move through',
         'Every enquiry tracked from first reply to signed contract, with nothing living in an inbox',
@@ -316,7 +316,7 @@ export const tiers = {
         'The pipeline works. It just cannot scale past the hours you personally have.',
       accent: 'emerald' as AccentName,
       emphasised: false,
-      buildLabel: 'Everything to the left, plus',
+      buildLabel: 'Everything in Pipeline + Conversion, plus',
       includes: [
         'A written sales process specific enough that a new hire can follow it in week one',
         'Recorded call reviews with named fixes, not general encouragement',
