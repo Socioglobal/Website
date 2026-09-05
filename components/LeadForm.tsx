@@ -135,8 +135,8 @@ export function LeadForm({
       >
         {fields.map((field) => {
           const inputId = `${formId}-${field}`
-          const isFullWidth =
-            layout === 'stacked' && (field === 'message' || field === 'outboundApproach')
+          // Only the free-text field spans the row; the two selects pair up.
+          const isFullWidth = layout === 'stacked' && field === 'message'
 
           return (
             <div key={field} className={cn(isFullWidth && 'sm:col-span-2')}>
